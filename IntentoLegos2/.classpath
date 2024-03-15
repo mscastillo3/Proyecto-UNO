@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="IntentoLegos2/src"/>
+	<classpathentry kind="output" path="IntentoLegos2/bin"/>
+</classpath>
