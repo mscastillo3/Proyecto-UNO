@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.HashMap;
 
@@ -19,51 +20,56 @@ public class ProblemaP1  {
 	public static void main(String[] args) throws Exception {
 		ProblemaP1 instancia = new ProblemaP1();
 		
-		try ( 
-				BufferedReader br = new BufferedReader(new FileReader("./IntentoLegos2/data/fichas.in"));
-			) { 
-				try (BufferedWriter writer = new BufferedWriter(new FileWriter ("./IntentoLegos2/data/fichas.out"))) {
-					String line = br.readLine();
-					int casos = Integer.parseInt(line);
-					line = br.readLine() ;
-					for(int i=0;i<=casos && line!=null && line.length()>0 && !"0".equals(line);i++) {
-						HashMap<Integer, Integer> respuestas = new HashMap<Integer,Integer>();
-						final String [] dataStr = line.split(" ");
-						final String[] newArray = new String[dataStr.length - 1];
-					    System.arraycopy(dataStr, 1, newArray, 0, newArray.length);
-						final int[] numeros = Arrays.stream(newArray).mapToInt(f->Integer.parseInt(f)).toArray();
-						startTime = System.currentTimeMillis();
-						int respuesta= instancia.m(0,numeros,respuestas);
-						
-						
-						writer.write(String.valueOf(respuesta));
-						writer.newLine();
+		if (args.length!=0) {
+			
+			try ( 
+					BufferedReader br = new BufferedReader(new FileReader("./IntentoLegos2/data/"+args[0]));
+				) { 
+					try (BufferedWriter writer = new BufferedWriter(new FileWriter ("./IntentoLegos2/data/"+args[1]))) {
+						String line = br.readLine();
+						int casos = Integer.parseInt(line);
+						line = br.readLine() ;
+						for(int i=0;i<=casos && line!=null && line.length()>0 && !"0".equals(line);i++) {
+							HashMap<Integer, Integer> respuestas = new HashMap<Integer,Integer>();
+							final String [] dataStr = line.split(" ");
+							final String[] newArray = new String[dataStr.length - 1];
+						    System.arraycopy(dataStr, 1, newArray, 0, newArray.length);
+							final int[] numeros = Arrays.stream(newArray).mapToInt(f->Integer.parseInt(f)).toArray();
+							startTime = System.currentTimeMillis();
+							int respuesta= instancia.m(0,numeros,respuestas);
+							writer.write(String.valueOf(respuesta));
+							writer.newLine();
+							line = br.readLine();
+							
+							
+						}
 						line = br.readLine();
-						
-						
 					}
+				}
+			}
+		else {
+			try ( 
+				InputStreamReader is= new InputStreamReader(System.in);
+				BufferedReader br = new BufferedReader(is);
+			) { 
+				
+				String line = br.readLine();
+				int casos = Integer.parseInt(line);
+				line = br.readLine() ;
+				for(int i=0;i<=casos && line!=null && line.length()>0 && !"0".equals(line);i++) {
+					HashMap<Integer, Integer> respuestas = new HashMap<Integer,Integer>();
+					final String [] dataStr = line.split(" ");
+					final String[] newArray = new String[dataStr.length - 1];
+				    System.arraycopy(dataStr, 1, newArray, 0, newArray.length);
+					final int[] numeros = Arrays.stream(newArray).mapToInt(f->Integer.parseInt(f)).toArray();
+					startTime = System.currentTimeMillis();
+					int respuesta= instancia.m(0,numeros,respuestas);
+					System.out.println(respuesta);
 					line = br.readLine();
 				}
 			}
-		//int[] u = {0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 2, 9, 3, 5, 14, 19, 23, 32};*/
-		/*int[] u = {0,0,0,0,0,0,0,0,0,0,0,02,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,02,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,02,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,02,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,02,2,2,0,0,0,0,0,0,5,
-				0,0,0,0,0,0,0,0,0,0,0,02,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,02,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,02,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,02,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,02,2,2,0,0,0,0,0,0,5,
-				0,0,0,0,0,0,0,0,0,0,0,02,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,02,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,02,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,02,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,02,2,2,0,0,0,0,0,0,5,
-				0,0,0,0,0,0,0,0,0,0,0,02,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,02,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,02,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,02,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,02,2,2,0,0,0,0,0,0,5,
-				0,0,0,0,0,0,0,0,0,0,0,02,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,02,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,02,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,02,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,02,2,2,0,0,0,0,0,0,5,
-				0,0,0,0,0,0,0,0,0,0,0,02,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,02,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,02,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,02,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,02,2,2,0,0,0,0,0,0,5,
-				0,0,0,0,0,0,0,0,0,0,0,02,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,02,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,02,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,02,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,02,2,2,0,0,0,0,0,0,5,
-				0,0,0,0,0,0,0,0,0,0,0,02,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,02,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,02,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,02,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,02,2,2,0,0,0,0,0,0,5,
-				0,0,0,0,0,0,0,0,0,0,0,02,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,02,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,02,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,02,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,02,2,2,0,0,0,0,0,0,100,
-				0,0,0,0,0,0,0,0,0,0,0,02,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,02,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,02,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,02,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,02,2,2,0,0,0,0,0,0,15000,
-				0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,02,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,02,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,02,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,02,2,2,0,0,0,0,0,0,5,
-				0,0,0,0,0,0,0,0,0,0,0,02,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,02,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,02,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,02,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,02,2,2,0,0,0,0,0,0,5,
-				0,0,0,0,0,0,0,0,0,0,0,02,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,02,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,150};*/
-		//int[]u = {10, 333, 11, 22, 300, 100};
-		//int[] u = {0, 3, 5, 7, 10, 5, 9, 6, 1, 7, 10, 4, 4, 0, 5, 1, 5, 9, 3, 2, 2, 0, 10, 10, 3, 7, 4, 2, 7, 9, 1, 0, 8, 1, 7, 6, 7, 4, 4, 10, 0, 8, 4, 3, 3, 0, 0, 4, 3, 4, 5, 0, 10, 7, 0, 8, 4, 8, 3, 1, 6, 2, 2, 8, 8, 1, 2, 1, 9, 1, 3, 4, 5, 2, 1, 6, 3, 7, 1, 3, 6, 8, 7, 4, 8, 1, 10, 4, 2, 2, 3, 5, 4, 10, 8, 0, 5, 3, 7, 7};
-		//System.out.println("Longitud:"+u.length);
-        //int d = statico(0, u);
-		//System.out.println(d);
+			}
+		
     }
 
 	public int m (int i, int[] u, HashMap<Integer, Integer> respuestas) {
